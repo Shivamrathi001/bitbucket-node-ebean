@@ -1,0 +1,33 @@
+image: atlassian/default-image:2
+
+pipelines:
+  default:
+    - step:
+        name: "Build"
+        script:
+          - echo "Everything is awesome!"
+          - zip -r weatherapp.zip *
+          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.2.3
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              APPLICATION_NAME: 'weather-bitbucket'
+              COMMAND: 'upload-only'
+              ZIP_FILE: 'weatherapp.zip'
+              S3_BUCKET: 'weatherapp-elasticbeanstalk-deployment'
+    - step:
+        name: "Deploy to Production"
+        deployment: production
+        trigger: automatic
+        script:
+          - echo "Deployment to Production!"
+          - pipe: atlassian/aws-elasticbeanstalk-deploy:0.2.3
+            variables:
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              APPLICATION_NAME: 'weather-bitbucket'
+              COMMAND: 'deploy-only'
+              ENVIRONMENT_NAME: 'Weatherbitbucket-env'
+              WAIT: 'true'
