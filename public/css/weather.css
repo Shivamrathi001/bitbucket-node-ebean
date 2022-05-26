@@ -1,0 +1,34 @@
+.background img{
+    background-color: white;
+    border-radius:5px;
+    margin:4%;
+    width:40%;
+}
+
+.city p{
+    margin:4%;
+    position: relative;
+}
+
+.temp,.WindSpeed{
+    font-size: 200%;
+    margin:4%;
+    position :relative;
+    width:100%;
+    margin:0 auto;
+    
+}
+.windSpan,.tempSpan{
+    color:#00adb5;
+    text-shadow:0 0 10px #222831;
+}
+.back{
+    position: relative;
+}
+.back img{
+    font-size: 50%;
+    width:20%;
+    position:relative;
+    top:20%;
+    left:20%;
+}
