@@ -6,7 +6,7 @@ pipelines:
     #       name: Enviroment Setup
     #       script:
     #         - mkdir build
-    #         - apt install <name>    
+    #         - apt install name
             #  - pwd
     - step:
         name: "Build"
